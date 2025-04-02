@@ -20,7 +20,7 @@
   --font-mono: var(--font-inter);
 }
 
-[data-theme='dark'] {
+.dark {
   --background: #35383E;
   --foreground: #ededed;
   --muted: #B0B0B0;
