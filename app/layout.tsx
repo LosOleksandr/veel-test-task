@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '@/providers/theme-provider';
+import { ThemeProvider } from '@/app/providers/theme-provider';
+import QueryProvider from './providers/query-provider';
 
 const raleway = Raleway({
   subsets: ['latin'],
@@ -22,14 +23,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${raleway.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
