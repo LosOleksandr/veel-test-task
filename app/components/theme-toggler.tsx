@@ -3,6 +3,7 @@
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 import { Sun, Moon } from 'lucide-react';
+import Button from './shared/button';
 
 const ThemeToggler: React.FC = () => {
   const { setTheme, resolvedTheme } = useTheme();
@@ -17,12 +18,13 @@ const ThemeToggler: React.FC = () => {
   const isDarkTheme = resolvedTheme === 'dark';
 
   return (
-    <button
-      className="text-foreground fill-foreground absolute top-4 right-4"
+    <Button
+      className="text-foreground absolute top-0 right-0 md:top-4 md:right-4"
+      variant="icon"
       onClick={() => setTheme(isDarkTheme ? 'light' : 'dark')}
     >
       {isDarkTheme ? <Sun /> : <Moon />}
-    </button>
+    </Button>
   );
 };
 
