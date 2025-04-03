@@ -40,7 +40,10 @@ const AddTodoForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full gap-4">
+    <form
+      onSubmit={handleSubmit}
+      className="flex w-full flex-col gap-4 sm:flex-row"
+    >
       <Input
         value={value}
         label="Add your new todo"
