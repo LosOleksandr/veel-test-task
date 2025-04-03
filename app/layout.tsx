@@ -3,6 +3,8 @@ import { Raleway } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/app/providers/theme-provider';
 import QueryProvider from './providers/query-provider';
+import { Toaster } from 'react-hot-toast';
+import Header from './components/header';
 
 const raleway = Raleway({
   subsets: ['latin'],
@@ -30,6 +32,8 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Toaster position="bottom-center" />
+            <Header />
             {children}
           </ThemeProvider>
         </QueryProvider>

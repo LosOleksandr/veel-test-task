@@ -19,7 +19,7 @@ const ThemeToggler: React.FC = () => {
 
   return (
     <Button
-      className="text-foreground absolute top-0 right-0 md:top-4 md:right-4"
+      className="text-foreground"
       variant="icon"
       onClick={() => setTheme(isDarkTheme ? 'light' : 'dark')}
     >
