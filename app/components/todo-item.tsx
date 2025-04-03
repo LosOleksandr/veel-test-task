@@ -4,10 +4,11 @@ import Button from './shared/button';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { TrashIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
+import clsx from 'clsx';
 
 type Props = Todo;
 
-const TodoItem: React.FC<Props> = ({ title, id }) => {
+const TodoItem: React.FC<Props> = ({ title, id, completed }) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -35,8 +36,18 @@ const TodoItem: React.FC<Props> = ({ title, id }) => {
   });
 
   return (
-    <div className="bg-muted/50 border-foreground/50 relative flex items-center justify-between rounded-2xl border-2 p-4 font-bold text-ellipsis">
-      <p className="line-clamp-2 overflow-hidden break-words text-ellipsis">
+    <div
+      className={clsx(
+        'border-foreground/50 relative flex items-center justify-between rounded-2xl border-2 p-4 font-bold',
+        completed ? 'bg-success/50' : 'bg-muted/50'
+      )}
+    >
+      <p
+        className={clsx(
+          'line-clamp-2 overflow-hidden break-words text-ellipsis',
+          completed ? 'line-through' : ''
+        )}
+      >
         {title}
       </p>
       <Button
