@@ -14,9 +14,9 @@ const TodoItem: React.FC<Props> = ({ title, id, completed }) => {
   const mutation = useMutation({
     mutationFn: deleteTodo,
     onMutate: async (todoId) => {
-      await queryClient.cancelQueries({ queryKey: ['todos'] });
+      await queryClient.cancelQueries({ queryKey: ['todos', todoId] });
 
-      const previousTodos = queryClient.getQueryData<Todo[]>(['todos']);
+      const previousTodos = queryClient.getQueryData<Todo[]>(['todos', todoId]);
 
       queryClient.setQueryData<Todo[]>(['todos'], (oldTodos) =>
         oldTodos ? oldTodos.filter((todo) => todo.id !== todoId) : []
