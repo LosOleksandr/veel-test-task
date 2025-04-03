@@ -5,6 +5,7 @@ import Input from './shared/input';
 import Button from './shared/button';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createTodo, Todo } from '../lib/api';
+import toast from 'react-hot-toast';
 
 const AddTodoForm: React.FC = () => {
   const [value, setValue] = React.useState('');
@@ -26,6 +27,7 @@ const AddTodoForm: React.FC = () => {
       if (context?.previousTodos) {
         queryClient.setQueryData(['todos'], context.previousTodos);
       }
+      toast.error('Failed to add todo');
     },
     onSettled: () => queryClient.invalidateQueries({ queryKey: ['todos'] }),
   });
@@ -41,7 +43,7 @@ const AddTodoForm: React.FC = () => {
     <form onSubmit={handleSubmit} className="flex w-full gap-4">
       <Input
         value={value}
-        label="Add todo"
+        label="Add your new todo"
         name="todo"
         id="todo"
         onChange={(e) => setValue(e.target.value)}

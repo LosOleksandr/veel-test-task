@@ -3,6 +3,7 @@ import { deleteTodo, Todo } from '../lib/api';
 import Button from './shared/button';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { TrashIcon } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 type Props = Todo;
 
@@ -26,6 +27,7 @@ const TodoItem: React.FC<Props> = ({ title, id }) => {
       if (context?.previousTodos) {
         queryClient.setQueryData(['todos'], context.previousTodos);
       }
+      toast.error('Failed to delete todo');
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['todos'] });
@@ -38,7 +40,6 @@ const TodoItem: React.FC<Props> = ({ title, id }) => {
         {title}
       </p>
       <Button
-        className="hover:text-danger"
         variant="icon"
         onClick={() => mutation.mutate(id)}
         disabled={mutation.isPending}
